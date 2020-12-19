@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jh-front-end-dpl
+  labels:
+    app: jh-front-end
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jh-front-end
+  template:
+    metadata:
+      labels:
+        app: jh-front-end
+    spec:
+      containers:
+      - name: jh-front-end
+        image: registry.digitalocean.com/jackhughes/jh-front-end:latest
+        ports:
+        - containerPort: 8181
