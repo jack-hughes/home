@@ -5,12 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: ':floppy_disk: Get short SHA'
+      - name: 💾 Get short SHA
         id: slug
         run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
-      - name: ':wrench: Build the Docker image'
+      - name: 📦 Build the Docker image
         run: docker build -t registry.digitalocean.com/jackhughes/jh-front-end:${{ steps.slug.outputs.sha8 }} .
-      - name: ':running_man: Run the Docker image'
-        run: docker run --name test-container registry.digitalocean.com/jackhughes/jh-front-end:${{ steps.slug.outputs.sha8 }}
-      - name: ':globe_with_meridians: cURL for HTML'
+      - name: 🏃 Run the Docker image
+        run: docker run -d --name test-container registry.digitalocean.com/jackhughes/jh-front-end:${{ steps.slug.outputs.sha8 }}
+      - name: 🌐 cURL for HTML
         run: curl $(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' test-container):8181 | grep "<p>Backend software engineer with 6 years experience in finance and cloud industries.</p>"
