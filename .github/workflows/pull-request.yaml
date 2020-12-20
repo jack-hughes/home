@@ -1,4 +1,4 @@
-name: Integration Test
+name: ci
 on: pull_request
 jobs:
   integration:
