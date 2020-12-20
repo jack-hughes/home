@@ -1,4 +1,4 @@
-name: pull_request
+name: Integration Test
 on: pull_request
 jobs:
   integration:
