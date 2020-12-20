@@ -1,8 +1,8 @@
-name: Push Image
+name: image
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   integration:
     runs-on: ubuntu-latest
