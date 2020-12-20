@@ -1,0 +1,24 @@
+name: push
+on:
+  push:
+    branches:
+      - master
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: 🔑 Login to DigitalOcean
+        uses: docker/login-action@v1
+        with:
+          registry: registry.digitalocean.com
+          username: ${{ secrets.DO_USERNAME }}
+          password: ${{ secrets.DO_PASSWORD }}
+      - name: 💾 Get short SHA
+        id: slug
+        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      - name: 📦 Build the Docker image
+        run: docker build -t registry.digitalocean.com/jackhughes/jh-front-end:master-${{ steps.slug.outputs.sha8 }} .
+      - name: 🚀 Push the Docker image
+        run: docker push registry.digitalocean.com/jackhughes/jh-front-end:master-${{ steps.slug.outputs.sha8 }} .
+      
