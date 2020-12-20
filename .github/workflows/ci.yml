@@ -1,0 +1,13 @@
+name: jackhughes.dev
+on: push
+jobs:
+  docker-login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to DigitalOcean container registry
+        uses: docker/login-action@v1
+        with:
+          registry: registry.digitalocean.com/jackhughes
+          username: ${{ secrets.DO_USERNAME }}
+          password: ${{ secrets.DO_PASSWORD }}
