@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  integration:
+  push:
     runs-on: ubuntu-latest
     steps:
       - name: 🗒 Checkout code
@@ -21,5 +21,5 @@ jobs:
       - name: 📦 Build the Docker image
         run: docker build -t registry.digitalocean.com/jackhughes/jh-front-end:master-${{ steps.slug.outputs.sha8 }} .
       - name: 🚀 Push the Docker image
-        run: docker push registry.digitalocean.com/jackhughes/jh-front-end:master-${{ steps.slug.outputs.sha8 }} .
+        run: docker push registry.digitalocean.com/jackhughes/jh-front-end:master-${{ steps.slug.outputs.sha8 }}
       
